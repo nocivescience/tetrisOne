@@ -226,6 +226,17 @@ let newGameState = () => {
     }
 }
 
+
+function minmax(value, limit){
+    if(value < 0){
+        return 0;
+    }
+    if(value > limit){
+        return limit;
+    }
+    return value;
+}
+const colorColum=minmax(Math.round(Math.random() * 6) + 1,7);
 const fullSend = () => {
     const allFilled = (row) => {
         for (let x of row) {
@@ -240,7 +251,8 @@ const fullSend = () => {
         if (allFilled(model.grid[i])) {
             score += SCORE_WORTH 
             model.grid.splice(i, 1) 
-            model.grid.push([0,0,0,0,0,0,0,0,0,0])
+            model.grid.push([colorColum,colorColum,colorColum,colorColum,colorColum,colorColum,colorColum,colorColum,colorColum,colorColum])
+
         }
     }
 
