@@ -1,0 +1,1 @@
+const BodyEl= document.querySelector('body');

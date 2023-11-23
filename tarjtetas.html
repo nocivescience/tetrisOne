@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Voltear Tarjeta</title>
+</head>
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .card {
+        width: 200px;
+        height: 300px;
+        perspective: 1000px;
+        /* Establece la perspectiva para el efecto 3D */
+        cursor: pointer;
+        border: black 1px solid;
+    }
+
+    .card-inner {
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        /* Preserva la perspectiva en los hijos del elemento */
+        transition: transform 0.5s;
+        /* Agrega una transición suave al transformar */
+    }
+
+    .card:hover .card-inner {
+        transform: rotateY(180deg);
+        /* Voltea la tarjeta en el eje Y al pasar el ratón por encima */
+    }
+
+    .card-inner,
+    .card-front,
+    .card-back {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        backface-visibility: hidden;
+        /* Oculta el reverso de las caras durante la animación */
+    }
+
+    .card-front {
+        background-color: #3498db;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .card-back {
+        background-color: #e74c3c;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: rotateY(180deg);
+        /* Inicialmente, muestra el reverso de la tarjeta */
+    }
+</style>
+
+<body>
+    <div class="card" id="card" onclick="flipCard()">
+        <div class="card-inner">
+            <div class="card-front">
+                <p>Frente de la tarjeta</p>
+            </div>
+            <div class="card-back">
+                <p>Reverso de la tarjeta</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function flipCard() {
+            var card = document.getElementById('card');
+            card.classList.toggle('flipped');
+        }
+
+    </script>
+</body>
+
+</html>

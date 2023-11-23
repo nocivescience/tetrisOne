@@ -264,3 +264,7 @@ document.addEventListener("keydown", (e) => {
             break
     }
 })
+document.addEventListener("click", (e) => {
+    const box= document.querySelector('.gane');
+    box.classList.toggle('activacion');
+})
