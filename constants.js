@@ -64,7 +64,7 @@ class Piece {
     constructor(shape, ctx) {
         this.shape = shape 
         this.ctx = ctx 
-        this.y = 0 
+        this.y = 17 
         this.x = Math.floor(COLS / 2)
     }
 
@@ -105,7 +105,7 @@ class GameModel {
                 if (shape[i][j] > 0) {
                     let p = x + j 
                     let q = y + i  
-                    if (p >= 0 && p < COLS && q < ROWS) {
+                    if (p >= 0 && p < COLS && q >0) {
                         // in bounds
                         if (this.grid[q][p] > 0) {
                             return true
@@ -137,7 +137,7 @@ class GameModel {
     moveDown() {
         if (this.fallingPiece === null) {
             this.renderGameState() 
-        } else if (this.collision(this.fallingPiece.x, this.fallingPiece.y + 1)) {
+        } else if (this.collision(this.fallingPiece.x, this.fallingPiece.y - 1)) {
             const shape = this.fallingPiece.shape 
             const x = this.fallingPiece.x 
             const y = this.fallingPiece.y 
@@ -152,13 +152,13 @@ class GameModel {
             })
 
             // check game over 
-            if (this.fallingPiece.y === 0) {
+            if (this.fallingPiece.y === 17) {
                 alert("Game over!") 
                 this.grid = this.makeStartingGrid()
             }
             this.fallingPiece = null
         } else {
-            this.fallingPiece.y += 1
+            this.fallingPiece.y -= 1
         }
         this.renderGameState()
     }
@@ -239,8 +239,8 @@ const fullSend = () => {
     for (let i = 0; i < model.grid.length; i++) {
         if (allFilled(model.grid[i])) {
             score += SCORE_WORTH 
-            model.grid.splice(i, 1) 
-            model.grid.unshift([0,0,0,0,0,0,0,0,0,0])
+            model.grid.splice(0, 1) 
+            model.grid.push([0,0,0,0,0,0,0,0,0,0])
         }
     }
 
