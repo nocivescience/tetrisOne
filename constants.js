@@ -1,4 +1,5 @@
-const GAME_CLOCK = 1000 
+let setIntervalo;
+let GAME_CLOCK = 1000; 
 const BLOCK_SIDE_LENGTH = 30 
 const ROWS = 20 
 const COLS = 10 
@@ -182,7 +183,7 @@ class GameModel {
 
     rotate() {
         if (this.fallingPiece !== null) {
-            let shape = [...this.fallingPiece.shape.map((row) => [...row])]
+            let shape = this.fallingPiece.shape
             // transpose of matrix 
             for (let y = 0; y < shape.length; ++y) {
                 for (let x = 0; x < y; ++x) {
@@ -209,7 +210,30 @@ let model = new GameModel(ctx)
 
 let score = 0 
 
-setInterval(() => {
+function startGame2() {
+    if(score>=0&&score<30){
+        GAME_CLOCK = 1000
+    }else if(score>=30&&score<60){
+        GAME_CLOCK = 800
+    }
+    else if(score>=60&&score<90){
+        GAME_CLOCK = 600
+    }
+    else if(score>=90&&score<120){
+        GAME_CLOCK = 400
+    }
+    else if(score>=120&&score<150){
+        GAME_CLOCK = 200
+    }
+    clearInterval(setIntervalo);
+    setIntervalo = setInterval(() => {
+        startGame2()
+        newGameState()
+    }, GAME_CLOCK);
+}
+
+setIntervalo=setInterval(() => {
+    startGame2()
     newGameState()
 }, GAME_CLOCK); 
 
