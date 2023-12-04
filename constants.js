@@ -262,8 +262,8 @@ const fullSend = () => {
 
     for (let i = 0; i < model.grid.length; i++) {
         if (allFilled(model.grid[i])) {
-            score += SCORE_WORTH 
-            model.grid.splice(i, 1) 
+            score += SCORE_WORTH
+            model.grid.splice(i, 1)
             model.grid.unshift([0,0,0,0,0,0,0,0,0,0])
         }
     }
