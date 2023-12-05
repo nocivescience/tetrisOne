@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+</style>
+<body>
+    <canvas id="game"></canvas>
+    <h2 id="scoreboard"></h2>
+    <script>
+        const canvas = document.getElementById('game');
+        const ctx = canvas.getContext('2d');
+        const columns=20;
+        const rows=30;
+        const score = document.getElementById('scoreboard');
+        class RenderPiece{
+            constructor(x, y, shape, ctx){
+                this.x = x;
+                this.y = y;
+                this.shape = shape;
+                this.ctx = ctx;
+            }
+            render(){
+                this.ctx.fillStyle = 'red';
+                for(let i=0;i<this.shape.length;i++){
+                    for(let j=0;j<this.shape[i].length;j++){
+                        if(this.shape[i][j]===1){
+                            this.ctx.fillRect((this.x+j)*30,(this.y+i)*30,30,30);
+                        }
+                    }
+                }
+            }
+        }
+        class ModelGame{
+            constructor(ctx){
+                this.ctx = ctx;
+                this.fallingPiece = null;
+                this.grid = this.getEmptyBoard();
+            }
+            getEmptyBoard(){
+                let grid=[];
+                for(let i=0;i<rows;i++){
+                    grid.push([]);
+                    for(let j=0;j<columns;j++){
+                        grid[i].push(0);
+                    }
+                }
+                return grid;
+            }
+            renderGame(){
+                for(let i=0;i<rows;i++){
+                    for(let j=0;j<columns;j++){
+                        if(this.grid[i][j]===0){
+                            this.ctx.fillStyle = 'green';
+                        }else{
+                            this.ctx.fillStyle = 'red';
+                        }
+                        this.ctx.fillRect(j*30,i*30,30,30);
+                    }
+                }
+            }
+        }
+        const model = new ModelGame(ctx);
+        model.renderGame();
+    </script>
+</body>
+</html>
